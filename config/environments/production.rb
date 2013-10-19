@@ -42,6 +42,9 @@ Feedr::Application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
+  # Default url, change me !
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
   # Set to :debug to see everything in the log.
   config.log_level = :info
 
