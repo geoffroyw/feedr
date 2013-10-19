@@ -8,9 +8,25 @@
     = csrf_meta_tags
 
   %body
-    %p.notice
-      =notice
-    %p.alert
-      =alert
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.navbar-collapse'}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          =link_to 'Feedr', root_path, :class => 'navbar-brand'
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              =link_to 'Home', root_path, :class => 'active'
+            %li
+              %a{:href => '#'} About
+            %li
+              %a{:href => '#'} Contact
+          .navbar-right
+            %ul.nav.navbar-nav
+              %li=link_to 'Sign out', destroy_user_session_path,  :method => :delete
 
-    =yield
+    .container
+      =yield
