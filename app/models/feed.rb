@@ -5,4 +5,6 @@ class Feed < ActiveRecord::Base
   validates :url, uniqueness: {case_sensitive: false}
   validates :url, format: {with: flux_url_regexp}
   validates :name,presence: true
+
+  has_many :feed_items, :foreign_key => 'feed_id'
 end
