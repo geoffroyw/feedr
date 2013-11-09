@@ -8,6 +8,8 @@ Feedr::Application.routes.draw do
   resources :homes, :only => :show
   root 'homes#show'
 
+  resources :feeds
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
