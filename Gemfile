@@ -12,7 +12,7 @@ gem 'compass-rails','~>2.0.alpha.0'
 gem 'haml-rails', '0.4'
 
 gem 'devise', '~>3.1.1'
-
+gem 'devise-i18n', '~> 0.10.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
