@@ -1,11 +1,14 @@
 require 'spec_helper'
 
 describe HomesController do
+  login_user
 
   describe "GET 'show'" do
-    it "returns http success" do
+    before(:each) do
       get 'show'
-      response.should be_success
+    end
+    describe 'returns http success' do
+      it{should respond_with :success}
     end
   end
 
