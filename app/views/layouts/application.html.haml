@@ -27,6 +27,11 @@
           .navbar-right
             %ul.nav.navbar-nav
               %li=link_to 'Sign out', destroy_user_session_path,  :method => :delete
-
+          = form_for @new_feed, :html => {:class => 'navbar-form navbar-right'} do |f|
+            .form-group
+              = f.text_field :name, :placeholder => 'Nom', :class => 'form-control'
+            .form-group
+              = f.text_field :url, :placeholder => 'Url', :class => 'form-control'
+            = f.submit 'Ajouter', :class => 'btn btn-success'
     .container
       =yield
