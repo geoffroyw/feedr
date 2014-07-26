@@ -4,7 +4,7 @@
 gem 'rails', '4.1.4'
 
 # Use sqlite3 as the database for Active Record
-gem 'mysql2', '0.3.11'
+gem 'mysql2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -41,7 +41,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails', '2.14.0'
-  gem 'shoulda-matchers', '2.3.0'
+  gem 'shoulda-matchers', '~>2.6.0'
   gem 'factory_girl_rails', '~> 4.0'
 end
 
@@ -49,6 +49,8 @@ group :development do
   gem 'bullet'
   gem 'ruby-growl'
 end
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
