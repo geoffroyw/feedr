@@ -6,5 +6,5 @@ class FeedItem < ActiveRecord::Base
   validates :title, :presence => true
   validates :description, :presence => true
 
-  belongs_to :feed, :polymorphic => true
+  belongs_to :feed
 end

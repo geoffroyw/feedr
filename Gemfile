@@ -15,6 +15,9 @@ gem 'haml-rails', '~>0.5.3'
 gem 'devise', '~>3.1.1'
 gem 'devise-i18n', '~> 0.10.0'
 
+gem 'delayed_job_active_record'
+gem 'feedjira'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 

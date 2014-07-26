@@ -1,1 +1,11 @@
 fr:
+  activerecord:
+    errors:
+      models:
+        feed:
+          attributes:
+            url:
+              invalid: 'Url invalide'
+              blank: 'Veuillez saisir une Url'
+            name:
+              blank: 'Veuillez saisir un nom'

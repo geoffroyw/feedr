@@ -1,0 +1,19 @@
+= form_for @feed, :html => {:class => 'form-horizontal', :role => 'form' } do |f|
+  .form-group
+    %label.col-sm-2.control-label Nom
+    .col-sm-10{:class => ('has-error' if @errors[:name].count > 0)}
+      = f.text_field :name, :placeholder => 'Nom', :class => 'form-control'
+      - if @errors[:name].count > 0
+        - @errors[:name].each do |msg|
+          %span.help-block= msg
+
+  .form-group
+    %label.col-sm-2.control-label URL
+    .col-sm-10{:class => ('has-error' if @errors[:url].count > 0)}
+      = f.text_field :url, :placeholder => 'Url', :class => 'form-control'
+      - if @errors[:url].count > 0
+        - @errors[:url].each do |msg|
+          %span.help-block= msg
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit 'Ajouter', :class => 'btn btn-success'

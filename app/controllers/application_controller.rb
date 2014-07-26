@@ -5,10 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  before_filter :new_feed
+  before_filter :build_new_feed
 
   private
-  def new_feed
+  def build_new_feed
     @new_feed = Feed.new
   end
 
