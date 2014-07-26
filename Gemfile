@@ -1,15 +1,16 @@
-source 'https://rubygems.org'
+  source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.4'
 
 # Use sqlite3 as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '0.3.11'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'compass-rails','~>2.0.alpha.0'
-gem 'haml-rails', '0.4'
+gem 'compass', '~> 0.12.2'
+gem 'compass-rails','~> 1.1.3'
+gem 'haml-rails', '~>0.5.3'
 
 gem 'devise', '~>3.1.1'
 gem 'devise-i18n', '~> 0.10.0'

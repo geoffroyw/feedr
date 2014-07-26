@@ -5,3 +5,5 @@
 /db/schema.rb
 
 /tmp
+
+/lib/faster_require-0.9.4
