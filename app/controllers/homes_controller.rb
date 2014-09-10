@@ -1,7 +1,7 @@
 class HomesController < ApplicationController
 
   def show
-    @feeds = Feed.all
+    @feeds = current_user.feeds
   end
 
 end

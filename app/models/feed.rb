@@ -6,7 +6,7 @@ class Feed < ActiveRecord::Base
   validates :url, format: {with: flux_url_regexp}
   validates :name,presence: true
 
-  has_many :feed_items, :foreign_key => 'feed_id'
+  has_many :items, :foreign_key => 'feed_id', :class_name => 'FeedItem'
   has_many :users, :through => :user_feeds
   has_many :user_feeds, :foreign_key => 'feed_id'
 

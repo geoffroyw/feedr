@@ -1,3 +1,5 @@
-%h1 Homes#show
-%p Find me in app/views/homes/show.html.haml
-
+- @feeds.each do |feed|
+  - feed.items.each do |item|
+    = link_to item.title, item.url
+    %p!= item.description
+    %br
