@@ -7,4 +7,6 @@ describe Feed do
 
 
   it{should have_many :feed_items}
+  it{should have_many :user_feeds}
+  it{should have_many(:users).through :user_feeds }
 end

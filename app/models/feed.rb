@@ -7,7 +7,8 @@ class Feed < ActiveRecord::Base
   validates :name,presence: true
 
   has_many :feed_items, :foreign_key => 'feed_id'
-
+  has_many :users, :through => :user_feeds
+  has_many :user_feeds, :foreign_key => 'feed_id'
 
 
   def fetch_items
