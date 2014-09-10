@@ -9,11 +9,16 @@ class FeedsController < ApplicationController
 
   def create
 
-    puts 'here'
-
-    @feed = Feed.new feed_param
+    @feed = Feed.find_by url: feed_param[:url]
+    if @feed.nil?
+      @feed = Feed.new feed_param
+    end
 
     if @feed.save
+      unless current_user.feeds.include? @feed
+        current_user.feeds << @feed
+        current_user.save
+      end
       flash[:notice] = 'Le flux a bien été ajouté à votre liste'
       @feed.fetch_items
       redirect_to :homes_show
@@ -28,6 +33,6 @@ class FeedsController < ApplicationController
 
   private
     def feed_param
-      params.require(:feed).permit(:name, :url)
+      params.require(:feed).permit(:url)
     end
 end

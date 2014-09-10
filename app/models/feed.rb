@@ -4,11 +4,17 @@ class Feed < ActiveRecord::Base
   validates :url, presence: true
   validates :url, uniqueness: {case_sensitive: false}
   validates :url, format: {with: flux_url_regexp}
-  validates :name,presence: true
 
   has_many :items, :foreign_key => 'feed_id', :class_name => 'FeedItem'
   has_many :users, :through => :user_feeds
   has_many :user_feeds, :foreign_key => 'feed_id'
+
+  before_save :fetch_name
+
+  def fetch_name
+    feed =  Feedjira::Feed.fetch_and_parse url
+    self.name = feed.title
+  end
 
 
   def fetch_items

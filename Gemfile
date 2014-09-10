@@ -46,6 +46,7 @@ group :test, :development do
   gem 'rspec-rails', '3.1.0'
   gem 'shoulda-matchers', '~>2.7.0'
   gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'shoulda-callback-matchers', '~> 1.0'
 end
 
 group :development do

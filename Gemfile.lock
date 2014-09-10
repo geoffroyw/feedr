@@ -162,6 +162,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    shoulda-callback-matchers (1.1.1)
+      activesupport (>= 3)
     shoulda-matchers (2.7.0)
       activesupport (>= 3.0.0)
     sprockets (2.11.0)
@@ -218,6 +220,7 @@ DEPENDENCIES
   ruby-growl
   sass-rails (~> 4.0.0)
   sdoc
+  shoulda-callback-matchers (~> 1.0)
   shoulda-matchers (~> 2.7.0)
   turbolinks
   tzinfo-data
