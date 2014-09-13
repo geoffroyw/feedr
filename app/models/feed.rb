@@ -25,7 +25,9 @@ class Feed < ActiveRecord::Base
       feed_item.url  = entry.url
       feed_item.title = entry.title
       feed_item.description = entry.summary
-      feed_item.enclosure_url = entry.enclosure_url unless entry.enclosure_url.nil?
+      if entry.respond_to? :enclosure_url
+        feed_item.enclosure_url = entry.enclosure_url
+      end
       feed_item.published_at = entry.published
       feed_item.save
     end
