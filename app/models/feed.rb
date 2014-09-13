@@ -23,8 +23,9 @@ class Feed < ActiveRecord::Base
       feed_item = FeedItem.find_or_create_by(url: entry.url)
       feed_item.feed_id = self.id
       feed_item.url  = entry.url
-      feed_item.title = entry.title
-      feed_item.description = entry.summary
+      feed_item.title = entry.title.sanitize
+      feed_item.description = entry.summary.sanitize
+      feed_item.content = entry.content
       if entry.respond_to? :enclosure_url
         feed_item.enclosure_url = entry.enclosure_url
       end
