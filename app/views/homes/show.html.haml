@@ -1,5 +1,6 @@
 - @feeds.each do |feed|
-  - feed.items.each do |item|
+  - feed.items.limit(5).each do |item|
+    %span=feed.name
     = link_to item.title, item.url
     %p!= item.description
     %br
