@@ -12,5 +12,6 @@
  *= require bootstrap
  *= require bootstrap-theme
  *= require theme
+ *= require _partial/feed.sass
  *= require_directory ./_partial
  */

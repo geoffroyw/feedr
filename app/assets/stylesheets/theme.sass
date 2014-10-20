@@ -1,5 +1,42 @@
+@import "variables"
+
 body
   padding-top: 50px
+  background-color: $background
 
 .content
-  padding: 40px 15px
+  padding: 20px
+
+.form-control
+  border-radius: 0
+
+.footer
+  background-color: $headerFooterBackground
+  color: #ecf0f1
+  padding: 10px
+  min-height: 150px
+
+.navbar-inverse
+  background: $headerFooterBackground
+  border-bottom-color: $headerSecondary
+  .navbar-brand
+    color: $headerLink
+  .navbar-nav
+    li
+      a
+        color: $headerLink
+        &:hover
+          background-color: $headerSecondary
+
+    .active
+      a
+        background-color: $headerSecondary
+        &:hover
+          background-color: shade($headerFooterBackground, 25) !important
+
+.btn
+  border-radius: 0
+
+.btn-success
+  background: $success
+  border-color: $sucessSecondary

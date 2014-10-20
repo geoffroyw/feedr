@@ -3,37 +3,49 @@
   %head
     %title Feedr - Your personal news feed !
     %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body
     .navbar.navbar-inverse.navbar-fixed-top
-      .container
-        .navbar-header
-          %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.navbar-collapse'}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          =link_to 'Feedr', root_path, :class => 'navbar-brand'
-        .collapse.navbar-collapse
+      /.container
+      .navbar-header
+        %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.navbar-collapse'}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        =link_to 'Feedr', root_path, :class => 'navbar-brand'
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li.active
+            =link_to 'Home', root_path, :class => 'active'
+          %li
+            %a{:href => '#'} About
+          %li
+            %a{:href => '#'} Contact
+        .navbar-right
           %ul.nav.navbar-nav
-            %li.active
-              =link_to 'Home', root_path, :class => 'active'
-            %li
-              %a{:href => '#'} About
-            %li
-              %a{:href => '#'} Contact
-          .navbar-right
-            %ul.nav.navbar-nav
-              %li=link_to 'Sign out', destroy_user_session_path,  :method => :delete
-          = form_for @new_feed,   :html => {:class => 'navbar-form navbar-right'} do |f|
-            .form-group
-              = f.text_field :url, :placeholder => 'Url', :class => 'form-control'
-            = f.submit 'Ajouter', :class => 'btn btn-success'
-    .container
-      .row.content
-        .col-md-3
-          Sidebar
-        .col-md-9
-          =yield
+            %li= link_to current_user.email,edit_user_registration_path
+            %li= link_to 'Sign out', destroy_user_session_path,  :method => :delete
+        = form_for @new_feed,   :html => {:class => 'navbar-form navbar-right'} do |f|
+          .form-group
+            = f.text_field :url, :placeholder => 'Url', :class => 'form-control'
+          = f.submit 'Ajouter', :class => 'btn btn-success'
+    /.container
+    .row.content
+      .col-md-2
+        Sidebar
+      .col-md-9
+        =yield
+      .col-md-1
+    .row.footer
+      .col-md-4
+        Some footer information
+      .col-md-4
+        %ul
+          %li Blog
+          %li About
+          %li Contact
+      .col-md-4
+        Follow us on twitter, Facebook, Instagram
