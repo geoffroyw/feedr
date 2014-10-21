@@ -19,6 +19,8 @@ gem 'delayed_job_active_record'
 gem 'feedjira'
 gem 'whenever'
 
+gem 'will_paginate', '~> 3.0.7'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
