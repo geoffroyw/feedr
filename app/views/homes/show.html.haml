@@ -1,17 +1,27 @@
 - @feeds.each do |feed|
   - feed.items.limit(5).each do |item|
-    .feed
+    .feed.js-display-action
       .row
         .col-md-3
-          .name=feed.name
-        .col-md-6
+          .name
+            - if feed.name.size > 45
+              =feed.name[0..45]
+              = "..."
+            -else
+              =feed.name
+        .col-md-7
           = link_to item.title, item.url, {:class => 'title'}
-        .col-md-3.actions
+        .col-md-2.actions.hide
           %ul.list-unstyled.list-inline
-            %li=link_to 'Voir l\'article original', item.url
             %li
+              %a.js-show-content{:href => '#', 'data-action' => 'show'}
+                %span.glyphicon.glyphicon-plus
+            %li
+              %a{:href => item.url}
+                %span.glyphicon.glyphicon-share
+              %li
               %a{:href => '#'} Marquer comme lu
-      .row
+      .row.content.hide
         .col-md-12.item-content
           %p!= item.description
         /%br
@@ -19,4 +29,4 @@
         /%br
         -unless item.enclosure_url.nil?
           .col-md-12
-            %img.thumbnail{:src => item.enclosure_url}
+            %img.img-thumbnail{:src => item.enclosure_url}
