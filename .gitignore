@@ -7,3 +7,5 @@
 /tmp
 
 *.psd
+
+.DS_STORE
