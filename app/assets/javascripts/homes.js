@@ -20,6 +20,7 @@ $(document).ready(function() {
 
         if ($(this).attr('data-action') == 'show') {
             $(this).parents('.row').siblings('.content').removeClass('hide')
+            $(this).parents('.feed').removeClass('unread')
 
             $(this).children('.glyphicon').removeClass('glyphicon-plus')
             $(this).children('.glyphicon').addClass('glyphicon-minus')
