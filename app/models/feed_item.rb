@@ -4,7 +4,6 @@ class FeedItem < ActiveRecord::Base
   validates :url, :presence => true
   validates :url, :format => {with: url_regex}
   validates :title, :presence => true
-  validates :description, :presence => true
 
   belongs_to :feed
 
