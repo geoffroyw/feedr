@@ -12,13 +12,16 @@
     .col-md-2.actions.hide
       %ul.list-unstyled.list-inline
         %li
+          =l item.published_at, format: :short
+        %li
           %a.js-show-content{:href => '#', 'data-action' => 'show'}
             %span.glyphicon.glyphicon-plus
         %li
           %a{:href => item.url}
             %span.glyphicon.glyphicon-share
           %li
-            =link_to 'Marquer comme lu', read_feed_item_path(:feed_id => item.feed.id, :id => item.id) , :method => :post
+            =link_to read_feed_item_path(:feed_id => item.feed.id, :id => item.id) , :method => :post do
+              %span.glyphicon.glyphicon-ok
   .row.content.hide
     .col-md-12.item-content
       %p!= item.description
