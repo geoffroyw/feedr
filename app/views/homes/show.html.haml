@@ -23,8 +23,7 @@
     .row.content.hide
       .col-md-12.item-content
         %p!= item.description
-      /%br
-      /%p!= item.content
+        %p!= item.content
       /%br
       -unless item.enclosure_url.nil?
         .col-md-12
