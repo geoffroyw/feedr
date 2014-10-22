@@ -5,8 +5,11 @@ class ItemsController < ApplicationController
     current_user.items.push @item
     current_user.save
 
+    respond_to do |format|
+      format.html {redirect_to root_path}
+      format.json { render json: {:success => true}}
+    end
 
-    redirect_to home_path
 
   end
 

@@ -14,7 +14,7 @@
         %li
           =l item.published_at, format: :short
         %li
-          %a.js-show-content{:href => '#', 'data-action' => 'show'}
+          %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => item.feed.id, 'data-item' => item.id}
             %span.glyphicon.glyphicon-plus
         %li
           %a{:href => item.url}

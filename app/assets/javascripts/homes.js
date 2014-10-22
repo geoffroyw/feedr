@@ -19,8 +19,27 @@ $(document).ready(function() {
         event.preventDefault();
 
         if ($(this).attr('data-action') == 'show') {
-            $(this).parents('.row').siblings('.content').removeClass('hide')
-            $(this).parents('.feed').removeClass('unread')
+            $(this).parents('.row').siblings('.content').removeClass('hide');
+
+            var feed_id = $(this).attr('data-feed')
+            var item_id = $(this).attr('data-item')
+
+            if($(this).parents('.feed').hasClass('unread')) {
+                var _this = $(this);
+                $.ajax({
+                    url: "/feeds/"+feed_id+"/items/"+item_id+"/read",
+                    method: "post",
+                    dataType: "json",
+                    success: function(data) {
+                        if(data.success) {
+                            _this.parents('.feed').removeClass('unread')
+                        }
+                    }
+                })
+
+            }
+
+
 
             $(this).children('.glyphicon').removeClass('glyphicon-plus')
             $(this).children('.glyphicon').addClass('glyphicon-minus')
