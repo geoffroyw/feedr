@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :feeds, :through => :user_feeds
   has_many :user_feeds, :foreign_key => 'user_id'
+
+  has_many :user_items, :foreign_key => 'user_id'
+  has_many :items, :through => :user_items
+
 end

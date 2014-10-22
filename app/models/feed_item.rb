@@ -6,7 +6,7 @@ class FeedItem < ActiveRecord::Base
   validates :title, :presence => true
 
   belongs_to :feed
-
+  has_many :user_items, :foreign_key => 'item_id'
 
   default_scope {order ('published_at DESC')}
 end

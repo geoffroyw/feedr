@@ -1,4 +1,6 @@
 Feedr::Application.routes.draw do
+  get 'item/read'
+
   get "homes/show"
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
@@ -8,7 +10,13 @@ Feedr::Application.routes.draw do
   resources :homes, :only => :show
   root 'homes#show'
 
-  resources :feeds
+  resources :feeds do
+    resources :items do
+      member do
+        post 'read' => 'items#read'
+      end
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
