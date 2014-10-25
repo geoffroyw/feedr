@@ -1,17 +1,17 @@
 # encoding: UTF-8
 class FeedsController < ApplicationController
-
+  before_filter :find_feed, :only => :show
 
 
   def new
-    @feed = Feed.new
+    @new_feed = Feed.new
   end
 
   def create
 
-    @feed = Feed.find_by url: feed_param[:url]
-    if @feed.nil?
-      @feed = Feed.new feed_param
+    @new_feed = Feed.find_by url: feed_param[:url]
+    if @new_feed.nil?
+      @new_feed = Feed.new feed_param
     end
 
     if @feed.save
@@ -31,8 +31,15 @@ class FeedsController < ApplicationController
   end
 
 
+  def show
+  end
+
   private
     def feed_param
       params.require(:feed).permit(:url)
+    end
+
+    def find_feed
+      @feed = Feed.find(params[:id])
     end
 end

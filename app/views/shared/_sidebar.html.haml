@@ -1,7 +1,4 @@
 %ul
   -feeds.each do |feed|
     %li
-      =feed.name
-      (
-      =feed.unread_item_count(current_user)
-      )
+      = link_to "#{feed.name} (#{feed.unread_item_count(current_user)})", feed_path(feed)

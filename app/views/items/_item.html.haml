@@ -1,12 +1,12 @@
-.feed.js-display-action{:class => ('unread' unless @user_read_items.include? item)}
+.feed.js-display-action{:class => ('unread' unless current_user.items.include? item)}
   .row
     .col-md-3
       .name
-        - if item.feed.name.size > 45
-          =item.feed.name[0..45]
+        - if feed.name.size > 45
+          =feed.name[0..45]
           = "..."
         -else
-          =item.feed.name
+          =feed.name
     .col-md-7
       = link_to item.title, item.url, {:class => 'title'}
     .col-md-2.actions.hide
@@ -14,13 +14,12 @@
         %li
           =l item.published_at, format: :short
         %li
-          %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => item.feed.id, 'data-item' => item.id, 'data-item-fetched' => false}
+          %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => feed.id, 'data-item' => item.id, 'data-item-fetched' => false}
             %span.glyphicon.glyphicon-plus
         %li
           %a{:href => item.url}
             %span.glyphicon.glyphicon-share
           %li
-            =link_to read_feed_item_path(:feed_id => item.feed.id, :id => item.id) , :method => :post do
+            =link_to read_feed_item_path(:feed_id => feed.id, :id => item.id) , :method => :post do
               %span.glyphicon.glyphicon-ok
   .row.content.hide
-    /= render 'items/item_content', :item => item
