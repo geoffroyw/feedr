@@ -1,4 +1,8 @@
-%ul
+%ul.list-unstyled
   -feeds.each do |feed|
     %li
-      = link_to "#{feed.name} (#{feed.unread_item_count(current_user)})", feed_path(feed)
+      -if feed.unread_item_count(current_user) > 0
+        %strong
+          = link_to "#{feed.name} (#{feed.unread_item_count(current_user)})", feed_path(feed)
+      -else
+        = link_to "#{feed.name} (#{feed.unread_item_count(current_user)})", feed_path(feed)

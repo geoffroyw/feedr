@@ -1,3 +1,7 @@
+%ol.breadcrumb
+  %li=link_to 'Home', root_path
+  %li.active= @feed.name
+
 - @items.each do |item|
   = render 'items/item', :item => item, :feed => @feed
 
