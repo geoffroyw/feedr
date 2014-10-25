@@ -1,21 +1,29 @@
 class ItemsController < ApplicationController
-  before_filter :get_item, :only => :read
+  before_filter :get_item, :only => [:read, :show]
 
   def read
-    current_user.items.push @item
-    current_user.save
+    mark_as_read
 
     respond_to do |format|
       format.html {redirect_to root_path}
       format.json { render json: {:success => true}}
     end
+  end
 
 
+  def show
+    mark_as_read
+    render :partial => 'item_content'
   end
 
 
   private
   def get_item
     @item = FeedItem.find params[:id]
+  end
+
+  def mark_as_read
+    current_user.items.push @item
+    current_user.save
   end
 end

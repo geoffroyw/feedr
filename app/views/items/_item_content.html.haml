@@ -1,0 +1,7 @@
+.col-md-12.item-content
+  %p!= @item.description
+  %p!= @item.content
+  /%br
+  -unless @item.enclosure_url.nil?
+    .col-md-12
+      %img.img-thumbnail{:src => @item.enclosure_url}

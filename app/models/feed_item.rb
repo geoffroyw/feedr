@@ -8,7 +8,7 @@ class FeedItem < ActiveRecord::Base
   belongs_to :feed
   has_many :user_items, :foreign_key => 'item_id'
 
-  scope :with_user , -> (user) {where('id' => user.user_items.map{|i| i.id})}
+  scope :with_user , -> (user) {where('id' =>  user.user_items.map{|i| i.id})}
 
 
 

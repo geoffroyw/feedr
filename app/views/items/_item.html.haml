@@ -14,7 +14,7 @@
         %li
           =l item.published_at, format: :short
         %li
-          %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => item.feed.id, 'data-item' => item.id}
+          %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => item.feed.id, 'data-item' => item.id, 'data-item-fetched' => false}
             %span.glyphicon.glyphicon-plus
         %li
           %a{:href => item.url}
@@ -23,10 +23,4 @@
             =link_to read_feed_item_path(:feed_id => item.feed.id, :id => item.id) , :method => :post do
               %span.glyphicon.glyphicon-ok
   .row.content.hide
-    .col-md-12.item-content
-      %p!= item.description
-      %p!= item.content
-    /%br
-    -unless item.enclosure_url.nil?
-      .col-md-12
-        %img.img-thumbnail{:src => item.enclosure_url}
+    /= render 'items/item_content', :item => item
