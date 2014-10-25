@@ -37,7 +37,7 @@ class Feed < ActiveRecord::Base
 
 
   def unread_item_count(user)
-    items.count-(user.items & items).count
+    items.count-items.with_user(user).count
 
   end
 
