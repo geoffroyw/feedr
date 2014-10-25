@@ -55,6 +55,7 @@ end
 group :development do
   gem 'bullet'
   gem 'ruby-growl'
+  gem 'capistrano', '~>3.2.1'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
@@ -65,8 +66,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
