@@ -35,7 +35,7 @@
     /.container
     .row.content
       .col-md-2
-        Sidebar
+        = render 'shared/sidebar', :feeds => @user_feeds
       .col-md-9
         =yield
       .col-md-1

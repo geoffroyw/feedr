@@ -34,5 +34,12 @@ class Feed < ActiveRecord::Base
     end
 
   end
+
+
+  def unread_item_count(user)
+    items.count-(user.items & items).count
+
+  end
+
   #handle_asynchronously :fetch_items
 end

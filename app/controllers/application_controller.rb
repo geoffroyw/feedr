@@ -5,11 +5,20 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  before_filter :build_new_feed
+  before_filter :build_new_feed, :fetch_user_feeds
 
   private
   def build_new_feed
     @new_feed = Feed.new
+  end
+
+  def fetch_user_feeds
+    if current_user.nil?
+      @user_feeds = []
+    else
+      @user_feeds = current_user.feeds
+    end
+
   end
 
 end
