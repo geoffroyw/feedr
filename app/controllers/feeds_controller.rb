@@ -32,6 +32,7 @@ class FeedsController < ApplicationController
 
 
   def show
+    @items = @feed.items.paginate(:page => params[:page], :per_page => 15)
   end
 
   private

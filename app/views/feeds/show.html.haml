@@ -1,2 +1,7 @@
-- @feed.items.each do |item|
+- @items.each do |item|
   = render 'items/item', :item => item, :feed => @feed
+
+.row
+  .col-md-12
+    .text-center
+      = page_navigation_links @items
