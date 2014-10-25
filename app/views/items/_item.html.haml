@@ -20,6 +20,6 @@
           %a{:href => item.url}
             %span.glyphicon.glyphicon-share
           %li
-            =link_to read_feed_item_path(:feed_id => feed.id, :id => item.id) , :method => :post do
+            %a.js-mark-read{:href => '#' ,'data-feed' => feed.id, 'data-item' => item.id}
               %span.glyphicon.glyphicon-ok
   .row.content.hide

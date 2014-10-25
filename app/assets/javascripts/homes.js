@@ -1,17 +1,30 @@
+var showAction = function(_this) {
+    _this.find('.actions').removeClass('hide');
+};
 
+var hideAction = function(_this) {
+    _this.find('.actions').addClass('hide')
+};
+
+var mark_as_read = function(_this, feed_id, item_id) {
+    $.ajax({
+        url: "/feeds/"+feed_id+"/items/"+item_id+"/read",
+        method: "post",
+        dataType: "json",
+        success: function(data) {
+            if(data.success) {
+                _this.parents('.feed').removeClass('unread')
+            }
+        }
+    })
+};
 
 
 
 
 $(document).ready(function() {
 
-    var showAction = function(_this) {
-        _this.find('.actions').removeClass('hide');
-    };
 
-    var hideAction = function(_this) {
-        _this.find('.actions').addClass('hide')
-    };
 
 
     $(document).on('mouseenter','.js-display-action',function(){
@@ -21,6 +34,7 @@ $(document).ready(function() {
     $(document).on('mouseleave','.js-display-action',function(){
         hideAction($(this))
     });
+
 
 
 
@@ -34,17 +48,7 @@ $(document).ready(function() {
             var item_id = $(this).attr('data-item');
 
             if($(this).parents('.feed').hasClass('unread')) {
-                var _this = $(this);
-                $.ajax({
-                    url: "/feeds/"+feed_id+"/items/"+item_id+"/read",
-                    method: "post",
-                    dataType: "json",
-                    success: function(data) {
-                        if(data.success) {
-                            _this.parents('.feed').removeClass('unread')
-                        }
-                    }
-                })
+                mark_as_read($(this),feed_id, item_id);
 
             }
 
@@ -81,7 +85,18 @@ $(document).ready(function() {
 
         }
 
-    })
+    });
+    
+    $(document).on('click', '.js-mark-read', function(event) {
+        event.preventDefault();
+
+        if ($(this).parents('.feed').hasClass('unread')) {
+            var feed_id = $(this).attr('data-feed');
+            var item_id = $(this).attr('data-item');
+            mark_as_read($(this), feed_id, item_id);
+        }
+    });
 
 
-})
+
+});
