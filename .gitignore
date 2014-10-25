@@ -9,3 +9,7 @@
 *.psd
 
 .DS_STORE
+
+Capfile
+config/deploy.rb
+config/deploy
