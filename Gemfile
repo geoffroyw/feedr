@@ -39,6 +39,8 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'daemons'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -57,6 +59,8 @@ group :development do
   gem 'ruby-growl'
   gem 'capistrano', '~>3.2.1'
   gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-bundler', '>= 1.1.0'
+  gem 'capistrano-rvm'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
