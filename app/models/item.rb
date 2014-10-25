@@ -1,4 +1,4 @@
-class FeedItem < ActiveRecord::Base
+class Item < ActiveRecord::Base
 
   url_regex = /\A((https?):\/\/|(www)\.)[a-z0-9-]+(\.[a-z0-9-]+)+([\/?].*)?\z/i
   validates :url, :presence => true
@@ -6,9 +6,11 @@ class FeedItem < ActiveRecord::Base
   validates :title, :presence => true
 
   belongs_to :feed
-  has_many :user_items, :foreign_key => 'item_id'
+  has_many :user_items
 
-  scope :with_user , -> (user) {where('id' =>  user.user_items.map{|i| i.id})}
+  scope :read_by , -> (user) {where('id' =>  user.user_items.map{|user_item| user_item.item_id})}
+
+  scope :unread_by, -> (user) {where('id not in (?)', user.user_items.map{|user_item| user_item.item_id})}
 
 
 

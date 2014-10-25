@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
 
   private
   def get_item
-    @item = FeedItem.find params[:id]
+    @item = Item.find params[:id]
   end
 
   def mark_as_read

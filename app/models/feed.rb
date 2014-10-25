@@ -5,9 +5,9 @@ class Feed < ActiveRecord::Base
   validates :url, uniqueness: {case_sensitive: false}
   validates :url, format: {with: flux_url_regexp}
 
-  has_many :items, :foreign_key => 'feed_id', :class_name => 'FeedItem'
+  has_many :items
   has_many :users, :through => :user_feeds
-  has_many :user_feeds, :foreign_key => 'feed_id'
+  has_many :user_feeds
 
   before_save :fetch_name
 
@@ -20,7 +20,7 @@ class Feed < ActiveRecord::Base
   def fetch_items
     feed = Feedjira::Feed.fetch_and_parse url
     feed.entries.each do |entry|
-      feed_item = FeedItem.find_or_create_by(url: entry.url)
+      feed_item = Item.find_or_create_by(url: entry.url)
       feed_item.feed_id = self.id
       feed_item.url  = entry.url
       feed_item.title = entry.title.sanitize unless entry.title.nil?
@@ -37,8 +37,11 @@ class Feed < ActiveRecord::Base
 
 
   def unread_item_count(user)
-    items.count-items.with_user(user).count
+    self.items.count-self.items.read_by(user).count
+  end
 
+  def read_item_count(user)
+    self.items.count-self.items.unread_by(user).count
   end
 
   #handle_asynchronously :fetch_items
