@@ -32,20 +32,21 @@
           .form-group
             = f.text_field :url, :placeholder => 'Url', :class => 'form-control'
           = f.submit 'Ajouter', :class => 'btn btn-success'
-    /.container
-    .row.content
-      .col-md-2
-        = render 'shared/sidebar', :feeds => @user_feeds
-      .col-md-9
-        =yield
-      .col-md-1
-    .row.footer
-      .col-md-4
-        Some footer information
-      .col-md-4
-        %ul
-          %li Blog
-          %li About
-          %li Contact
-      .col-md-4
-        Follow us on twitter, Facebook, Instagram
+    .container-fluid
+      .row.content
+        .col-md-2
+          = render 'shared/sidebar', :feeds => @user_feeds
+        .col-md-9
+          =yield
+        .col-md-1
+    .container-fluid
+      .row.footer
+        .col-md-4
+          Some footer information
+        .col-md-4
+          %ul
+            %li Blog
+            %li About
+            %li Contact
+        .col-md-4
+          Follow us on twitter, Facebook, Instagram
