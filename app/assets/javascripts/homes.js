@@ -1,4 +1,8 @@
 
+
+
+
+
 $(document).ready(function() {
 
     var showAction = function(_this) {
@@ -9,13 +13,18 @@ $(document).ready(function() {
         _this.find('.actions').addClass('hide')
     };
 
-    $('.js-display-action').hover(function(){
+
+    $(document).on('mouseenter','.js-display-action',function(){
         showAction($(this))
-    }, function() {
+    });
+
+    $(document).on('mouseleave','.js-display-action',function(){
         hideAction($(this))
     });
 
-    $('.js-show-content').on('click', function(event) {
+
+
+    $(document).on('click', '.js-show-content', function(event) {
         event.preventDefault();
 
         if ($(this).attr('data-action') == 'show') {
