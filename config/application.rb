@@ -22,8 +22,6 @@ module Feedr
 
     config.encoding='utf-8'
 
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-
     config.to_prepare do
       Devise::SessionsController.layout 'devise'
       Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? 'application' : 'devise' }
