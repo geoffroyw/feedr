@@ -14,13 +14,13 @@ class FeedsController < ApplicationController
       @new_feed = Feed.new feed_param
     end
 
-    if @feed.save
-      unless current_user.feeds.include? @feed
-        current_user.feeds << @feed
+    if @new_feed.save
+      unless current_user.feeds.include? @new_feed
+        current_user.feeds << @new_feed
         current_user.save
       end
       flash[:notice] = 'Le flux a bien été ajouté à votre liste'
-      @feed.fetch_items
+      @new_feed.fetch_items
       redirect_to :homes_show
     else
       @errors = @feed.errors
