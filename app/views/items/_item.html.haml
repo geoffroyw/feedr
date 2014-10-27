@@ -8,7 +8,7 @@
         -else
           =feed.name
     .col-md-7
-      = link_to item.title, item.url, {:class => 'title'}
+      = link_to item.title, view_feed_item_path(feed, item), {:class => 'title', :target => '_blank'}
     .col-md-1.publishe-date
       =l item.published_at, format: :short
     .col-md-1.actions.hide
@@ -17,7 +17,7 @@
           %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => feed.id, 'data-item' => item.id, 'data-item-fetched' => false, :title => 'Voir le contenu'}
             %span.glyphicon.glyphicon-plus
         %li
-          %a{:href => item.url, :title => 'Voir l\'article original'}
+          =link_to view_feed_item_path(feed, item), {:title => 'Voir l\'article original', :target => '_blank'} do
             %span.glyphicon.glyphicon-share
         -unless current_user.items.include? item
           %li
