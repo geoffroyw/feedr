@@ -23,7 +23,7 @@ class FeedsController < ApplicationController
       @new_feed.fetch_items
       redirect_to :homes_show
     else
-      @errors = @feed.errors
+      @errors = @new_feed.errors
       flash[:error] = 'Erreur lors de l\'ajout du flux à votre liste'
       render :new
     end
