@@ -52,7 +52,9 @@ group :test, :development do
   gem 'shoulda-matchers', '~>2.7.0'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'shoulda-callback-matchers', '~> 1.0'
+  gem 'faker', '~> 1.4.3'
 end
+
 
 group :development do
   gem 'bullet'

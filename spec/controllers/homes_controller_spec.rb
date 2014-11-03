@@ -3,6 +3,7 @@ require 'spec_helper'
 describe HomesController do
   login_user
 
+
   describe "GET 'show'" do
     before(:each) do
       get 'show'
