@@ -14,6 +14,7 @@ Feedr::Application.routes.draw do
     resources :items do
       member do
         post 'read' => 'items#read'
+        get 'view'
       end
     end
   end

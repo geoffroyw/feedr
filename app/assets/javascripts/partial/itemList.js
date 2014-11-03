@@ -8,7 +8,7 @@ var hideAction = function(_this) {
 
 var mark_as_read = function(_this, feed_id, item_id) {
     $.ajax({
-        url: "feeds/"+feed_id+"/items/"+item_id+"/read",
+        url: "/feeds/"+feed_id+"/items/"+item_id+"/read",
         method: "post",
         dataType: "json",
         success: function(data) {
@@ -57,7 +57,7 @@ $(document).ready(function() {
             if(!fetched) {
                 var _this = $(this);
                 $.ajax({
-                    url: "feeds/" + feed_id + "/items/" + item_id,
+                    url: "/feeds/" + feed_id + "/items/" + item_id,
                     method: "get",
                     success: function (data) {
                         _this.parents('.row').siblings('.content').html(data);

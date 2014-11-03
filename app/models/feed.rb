@@ -2,6 +2,7 @@ class Feed < ActiveRecord::Base
 
   flux_url_regexp = /\A((https?):\/\/|(www)\.)[a-z0-9-]+(\.[a-z0-9-]+)+([\/?].*)?\z/i
   validates :url, presence: true
+  validates :name, presence: true
   validates :url, uniqueness: {case_sensitive: false}
   validates :url, format: {with: flux_url_regexp}
 
@@ -9,11 +10,15 @@ class Feed < ActiveRecord::Base
   has_many :users, :through => :user_feeds
   has_many :user_feeds
 
-  before_save :fetch_name
+  before_validation :fetch_name
 
   def fetch_name
     feed =  Feedjira::Feed.fetch_and_parse url
-    self.name = feed.title
+    if feed.title.nil?
+      self.name = self.url
+    else
+      self.name = feed.title
+    end
   end
 
 

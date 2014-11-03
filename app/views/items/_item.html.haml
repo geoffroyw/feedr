@@ -8,18 +8,19 @@
         -else
           =feed.name
     .col-md-7
-      = link_to item.title, item.url, {:class => 'title'}
-    .col-md-2.actions.hide
+      = link_to item.title, view_feed_item_path(feed, item), {:class => 'title', :target => '_blank'}
+    .col-md-1.published-date
+      =l item.published_at, format: :short
+    .col-md-1.actions.hide
       %ul.list-unstyled.list-inline
         %li
-          =l item.published_at, format: :short
-        %li
-          %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => feed.id, 'data-item' => item.id, 'data-item-fetched' => false}
+          %a.js-show-content{:href => '#', 'data-action' => 'show', 'data-feed' => feed.id, 'data-item' => item.id, 'data-item-fetched' => false, :title => 'Voir le contenu'}
             %span.glyphicon.glyphicon-plus
         %li
-          %a{:href => item.url}
+          =link_to view_feed_item_path(feed, item), {:title => 'Voir l\'article original', :target => '_blank'} do
             %span.glyphicon.glyphicon-share
+        -unless current_user.items.include? item
           %li
-            %a.js-mark-read{:href => '#' ,'data-feed' => feed.id, 'data-item' => item.id}
+            %a.js-mark-read{:href => '#' ,'data-feed' => feed.id, 'data-item' => item.id, :title => 'Marquer comme lu'}
               %span.glyphicon.glyphicon-ok
   .row.content.hide

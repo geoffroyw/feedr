@@ -8,5 +8,21 @@
     = csrf_meta_tags
 
   %body.devise-body
+    .navbar.navbar-inverse.navbar-fixed-top
+      /.container
+      .navbar-header
+        %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.navbar-collapse'}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        =link_to 'Feedr', root_path, :class => 'navbar-brand'
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => '#'} About
+          %li
+            %a{:href => '#'} Contact
     .container.content
       =yield
+    .stick-footer
+      = render 'layouts/footer'
