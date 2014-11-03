@@ -9,7 +9,7 @@
           =feed.name
     .col-md-7
       = link_to item.title, view_feed_item_path(feed, item), {:class => 'title', :target => '_blank'}
-    .col-md-1.publishe-date
+    .col-md-1.published-date
       =l item.published_at, format: :short
     .col-md-1.actions.hide
       %ul.list-unstyled.list-inline
