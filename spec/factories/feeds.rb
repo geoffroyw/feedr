@@ -20,4 +20,7 @@ FactoryGirl.define do
     end
   end
 
+  factory :invalid_feed, parent: :feed do |f|
+    f.url nil
+  end
 end
