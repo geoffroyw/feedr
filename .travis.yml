@@ -1,9 +1,11 @@
 language: ruby
 rvm:
-  - 2.1.2
+  - 2.1.3
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate test
   - rspec spec
+
+bundler_args: --path vendor/bundle --without test --without documentation
 
 env:
   - DB=mysql
