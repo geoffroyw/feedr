@@ -36,6 +36,9 @@ describe ItemsController do
       @item.reload
       expect(@item.read_count).to eq(2)
     end
+    it 'add item to user items' do
+      expect(@current_user.items).to include(@item)
+    end
   end
 
   describe "GET 'read'" do
@@ -61,6 +64,10 @@ describe ItemsController do
       @item.reload
       expect(@item.read_count).to eq(2)
     end
+
+    it 'add item to user items' do
+      expect(@current_user.items).to include(@item)
+    end
   end
 
   describe "GET 'view'" do
@@ -80,8 +87,10 @@ describe ItemsController do
       get 'view', id: @item, feed_id: @feed
       @item.reload
       expect(@item.view_count).to eq(2)
+    end
 
-
+    it 'add item to user items' do
+      expect(@current_user.items).to include(@item)
     end
   end
 

@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   def read
     mark_as_read
-
+    add_item_to_user_items
     respond_to do |format|
       format.json { render json: {:success => true}}
     end
@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
 
   def show
     mark_as_read
+    add_item_to_user_items
     render :partial => 'item_content'
   end
 
@@ -23,6 +24,7 @@ class ItemsController < ApplicationController
       @item.view_count=@item.view_count+1
     end
     @item.save!
+    add_item_to_user_items
     redirect_to @item.url
   end
 
@@ -39,6 +41,9 @@ class ItemsController < ApplicationController
       @item.read_count=@item.read_count+1
     end
     @item.save!
+  end
+
+  def add_item_to_user_items
     current_user.items.push @item
     current_user.save
   end
