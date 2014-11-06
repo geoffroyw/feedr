@@ -7,9 +7,9 @@ gem 'rails', '4.1.7'
 gem 'mysql2'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
-gem 'compass', '~> 0.12.2'
-gem 'compass-rails','~> 1.1.3'
+#gem 'sass-rails', '~> 4.0.4'
+gem 'compass', '~> 1.0.1'
+gem 'compass-rails','~> 2.0.1'
 gem 'haml-rails', '~>0.5.3'
 
 gem 'devise', '~>3.1.1'
