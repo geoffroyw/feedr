@@ -8,5 +8,5 @@ describe UserFeed do
   it{should belong_to :user}
   it{should belong_to :feed}
 
-  it { should callback(:set_default_name).after(:create)}
+  it { should callback(:set_default_name).before(:validation)}
 end

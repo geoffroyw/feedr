@@ -52,15 +52,25 @@ describe FeedsController do
       end
 
       it 'assign @new_feed' do
+        post :create, feed: attributes_for(:feed)
         expect(assigns(:new_feed))
+      end
+
+      it 'adds the feed to user feeds' do
+        expect {
+          post :create, feed: attributes_for(:feed)
+        }.to change(@current_user.user_feeds, :count).by(1)
       end
     end
 
     context 'with invalid attributes' do
+      before(:each) do
+        post :create, feed: attributes_for(:invalid_feed)
+      end
       it 'does not save the feed' do
         expect {
           post :create, feed: attributes_for(:invalid_feed)
-        }.to_not change(Feed, :count)
+        }.to_not change{Feed.count}
       end
 
       it 'assigns the @errors' do
@@ -68,12 +78,17 @@ describe FeedsController do
       end
 
       it 're-renders the new method' do
-        post :create, feed: attributes_for(:invalid_feed)
         is_expected.to render_template :new
       end
 
       it 'assign @new_feed' do
         expect(assigns(:new_feed))
+      end
+
+      it 'does not add the feed to user feeds' do
+        expect {
+          post :create, feed: attributes_for(:invalid_feed)
+        }.to_not change{@current_user.user_feeds.count}
       end
     end
   end

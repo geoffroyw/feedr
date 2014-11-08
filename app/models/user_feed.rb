@@ -7,11 +7,13 @@ class UserFeed < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  after_create :set_default_name
+  before_validation :set_default_name
+
+  scope :of_user , -> (user) {where('user_id' =>  user.id)}
 
   private
   def set_default_name
-    self.name = self.feed.name
+    self.name = self.feed.name if !self.feed.nil? && self.name.blank?
   end
 
 end
