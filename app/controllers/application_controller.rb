@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       @user_feeds = []
     else
-      @user_feeds = current_user.feeds
+      @user_feeds = current_user.user_feeds.includes(:feed)
     end
 
   end

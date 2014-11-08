@@ -7,9 +7,9 @@ gem 'rails', '4.1.7'
 gem 'mysql2'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
-gem 'compass', '~> 0.12.2'
-gem 'compass-rails','~> 1.1.3'
+#gem 'sass-rails', '~> 4.0.4'
+gem 'compass', '~> 1.0.1'
+gem 'compass-rails','~> 2.0.1'
 gem 'haml-rails', '~>0.5.3'
 
 gem 'devise', '~>3.1.1'
@@ -52,7 +52,9 @@ group :test, :development do
   gem 'shoulda-matchers', '~>2.7.0'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'shoulda-callback-matchers', '~> 1.0'
+  gem 'faker', '~> 1.4.3'
 end
+
 
 group :development do
   gem 'bullet'

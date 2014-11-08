@@ -1,7 +1,6 @@
 Feedr::Application.routes.draw do
-  get 'item/read'
 
-  get "homes/show"
+  get 'homes/show'
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,12 +9,16 @@ Feedr::Application.routes.draw do
   resources :homes, :only => :show
   root 'homes#show'
 
-  resources :feeds do
+  resources :feeds, :only => [:new, :create, :show] do
     resources :items do
       member do
-        post 'read' => 'items#read'
+        post 'read'
         get 'view'
       end
+    end
+    member do
+      get 'edit' =>'user_feeds#edit'
+      patch 'update' =>'user_feeds#update', :as => 'update_user'
     end
   end
 

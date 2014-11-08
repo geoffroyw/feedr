@@ -1,5 +1,9 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe UserItem, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe UserItem, :type => :model do
+  it{should validate_presence_of :user}
+  it{should validate_presence_of :item}
+
+  it{should belong_to :user}
+  it{should belong_to :item}
 end

@@ -2,8 +2,8 @@
   .row
     .col-md-3
       .name
-        - if feed.name.size > 45
-          =feed.name[0..45]
+        - if feed.custom_name(current_user).size > 45
+          =feed.custom_name(current_user)[0..45]
           = "..."
         -else
           =feed.name

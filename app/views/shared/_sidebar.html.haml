@@ -1,8 +1,10 @@
 %ul.list-unstyled
-  -feeds.each do |feed|
+  -user_feeds.each do |user_feed|
     %li
-      -if feed.unread_item_count(current_user) > 0
+      -if user_feed.unread_item_count > 0
         %strong
-          = link_to "#{feed.name} (#{feed.unread_item_count(current_user)})", feed_path(feed)
+          = link_to "#{user_feed.name} (#{user_feed.unread_item_count})", feed_path(user_feed.feed)
+          = link_to edit_feed_path(user_feed), {:title => 'Modifier le flux'} do
+            %span.glyphicon.glyphicon-pencil
       -else
-        = link_to "#{feed.name} (#{feed.unread_item_count(current_user)})", feed_path(feed)
+        = link_to "#{user_feed.name} (#{user_feed.unread_item_count})", feed_path(user_feed.feed)
