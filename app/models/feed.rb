@@ -41,12 +41,12 @@ class Feed < ActiveRecord::Base
   end
 
 
-  def unread_item_count(user)
-    self.items.count-self.items.read_by(user).count
-  end
-
-  def read_item_count(user)
-    self.items.count-self.items.unread_by(user).count
+  def custom_name(user)
+    if self.user_feeds.of_user(user).first.nil?
+      self.name
+    else
+      self.user_feeds.of_user(user).first.name
+    end
   end
 
   #handle_asynchronously :fetch_items

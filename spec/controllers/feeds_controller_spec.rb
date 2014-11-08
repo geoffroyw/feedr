@@ -61,6 +61,15 @@ describe FeedsController do
           post :create, feed: attributes_for(:feed)
         }.to change(@current_user.user_feeds, :count).by(1)
       end
+
+      it 'sets the user feed name' do
+        post :create, feed: attributes_for(:feed)
+        @current_user.user_feeds.reload
+        @current_user.user_feeds.each do |f|
+          expect(f.name).to eq 'title'
+        end
+
+      end
     end
 
     context 'with invalid attributes' do

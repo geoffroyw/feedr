@@ -2,5 +2,9 @@
 
 FactoryGirl.define do
   factory :user_feed do
+    name {Faker::Lorem.sentence(1)}
+    association :feed, factory: :feed, strategy: :build
+    association :user, factory: :user, strategy: :build
+
   end
 end

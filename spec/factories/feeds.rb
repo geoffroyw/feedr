@@ -18,6 +18,12 @@ FactoryGirl.define do
         create_list(:item, 5, feed: feed)
       end
     end
+
+    factory :feed_with_user_feeds do
+      after(:create) do |feed|
+        create_list(:user_feed, 5, feed: feed)
+      end
+    end
   end
 
   factory :invalid_feed, parent: :feed do |f|
