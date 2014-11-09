@@ -9,7 +9,7 @@
     %label.col-sm-2.control-label{:for => 'url'} Url
     .col-sm-10
       %input.form-control{:type => 'text', :disabled => 'disabled', :value => @user_feed.feed.url}
-  .form-group
+  .form-group{:class => ('has-error' if ! @errors.nil? && @errors[:name].count > 0)}
     =f.label :name, :class => 'col-sm-2 control-label'
     .col-sm-10
       = f.text_field :name, :class => 'form-control'
