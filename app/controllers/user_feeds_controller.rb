@@ -12,6 +12,7 @@ class UserFeedsController < ApplicationController
       redirect_to feed_path(@user_feed.feed)
     else
       @errors = @user_feed.errors
+      #@user_feed_base.reload
       render :edit
     end
   end
@@ -23,6 +24,7 @@ class UserFeedsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     else
       @user_feed = user_feeds.first
+      @user_feed_base = UserFeed.new(@user_feed.attributes)
     end
   end
 
