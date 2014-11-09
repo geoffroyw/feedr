@@ -8,7 +8,7 @@ describe User do
   it{should have_many :user_feeds}
   it{should have_many(:feeds).through :user_feeds }
 
-  it{should have_many :feed_categories}
+  it{should have_many :categories}
 
   it{should have_many :user_items}
   it{should have_many(:items).through :user_items }

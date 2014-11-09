@@ -1,4 +1,4 @@
-class FeedCategory < ActiveRecord::Base
+class Category < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :user_feed

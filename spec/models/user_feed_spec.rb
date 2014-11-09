@@ -10,5 +10,5 @@ describe UserFeed do
 
   it { should callback(:set_default_name).before(:validation)}
 
-  it{should have_many :feed_categories}
+  it{should have_many :categories}
 end

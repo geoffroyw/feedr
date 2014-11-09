@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FeedCategory do
+describe Category do
   it{should belong_to(:user)}
   it{should belong_to(:user_feed)}
 
