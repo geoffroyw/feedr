@@ -6,7 +6,7 @@
           =feed.custom_name(current_user)[0..45]
           = "..."
         -else
-          =feed.name
+          =feed.custom_name(current_user)
     .col-md-7
       = link_to item.title, view_feed_item_path(feed, item), {:class => 'title', :target => '_blank'}
     .col-md-1.published-date
