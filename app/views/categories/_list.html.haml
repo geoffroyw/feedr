@@ -1,0 +1,10 @@
+%li
+  =c.name
+  - unless c.user_feeds.nil?
+    %ul
+      -c.user_feeds.each do |f|
+        %li=link_to f.name, feed_path(f)
+  -unless c.children.empty?
+    -c.children.map do |child|
+      %ol
+        = render 'list', :c => child

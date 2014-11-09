@@ -1,0 +1,8 @@
+%ol.breadcrumb
+  %li=link_to 'Home', root_path
+  %li=link_to 'Mes catégories de flux', categories_path
+  %li.active Ajouter une catégorie
+
+
+=form_for @new_category, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+  = render 'form', :f => f

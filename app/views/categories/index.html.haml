@@ -1,0 +1,8 @@
+%ol.breadcrumb
+  %li=link_to 'Home', root_path
+  %li.active Mes catégories de flux
+
+
+%ol
+  -@categories.roots.map do |c|
+    = render 'list', :c => c

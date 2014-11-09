@@ -5,6 +5,7 @@ FactoryGirl.define do
     name {Faker::Lorem.sentence(1)}
     association :feed, factory: :feed, strategy: :build
     association :user, factory: :user, strategy: :build
+    association :category, factory: :category, strategy: :build
 
   end
 end

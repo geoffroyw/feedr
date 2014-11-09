@@ -3,11 +3,9 @@
 FactoryGirl.define do
   factory :category do
     name {Faker::Lorem.sentence(1)}
-    association :user_feed, factory: :user_feed, strategy: :build
     association :user, factory: :user, strategy: :build
-    parent_id 1
-    lft 1
-    rgt 1
-    depth 1
+    factory :invalid_category, parent: :category do |f|
+      f.name nil
+    end
   end
 end
