@@ -9,4 +9,6 @@ describe UserFeed do
   it{should belong_to :feed}
 
   it { should callback(:set_default_name).before(:validation)}
+
+  it{should have_many :feed_categories}
 end
