@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
 
   before_validation :set_count_to_zero
 
-  default_scope {order ('published_at DESC, id ASC')}
+  default_scope {order ("#{table_name}.published_at DESC, #{table_name}.id ASC")}
 
   private
   def set_count_to_zero
