@@ -12,7 +12,6 @@ function updateUnreadCount() {
             if(data.success) {
                 $.each($.parseJSON(data.values), function(i, e) {
                     $('*[data-badge-for="'+e.id+'"]').html(e.count);
-                    console.log($('.badge, *[data-feed="'+e.id+'"'))
                 })
             }
         }
