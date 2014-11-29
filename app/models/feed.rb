@@ -2,18 +2,18 @@ class Feed < ActiveRecord::Base
 
   flux_url_regexp = /\A((https?):\/\/|(www)\.)[a-z0-9-]+(\.[a-z0-9-]+)+([\/?].*)?\z/i
   validates :url, presence: true
-  validates :name, presence: true
   validates :url, uniqueness: {case_sensitive: false}
   validates :url, format: {with: flux_url_regexp}
+  validate :we_can_parse_the_feed
 
   has_many :items
   has_many :users, :through => :user_feeds
   has_many :user_feeds
 
-  before_validation :fetch_name
+  before_save :fetch_name
 
   def fetch_name
-    feed =  Feedjira::Feed.fetch_and_parse url
+    feed =  get_feedjira_object
     if feed.title.nil?
       self.name = self.url
     else
@@ -23,7 +23,7 @@ class Feed < ActiveRecord::Base
 
 
   def fetch_items
-    feed = Feedjira::Feed.fetch_and_parse url
+    feed = get_feedjira_object
     feed.entries.each do |entry|
       feed_item = Item.find_or_create_by(url: entry.url)
       feed_item.feed_id = self.id
@@ -49,5 +49,23 @@ class Feed < ActiveRecord::Base
     end
   end
 
+
+  private
+    def we_can_parse_the_feed
+      get_feedjira_object
+      puts @feedjira
+      if @feedjira.nil? || @feedjira == 0 || @feedjira.is_a?(Fixnum)
+        errors.add(:url, "n'est pas valide")
+        false
+      end
+    end
+
+
+    def get_feedjira_object
+      if @feedjira.nil?
+        @feedjira = Feedjira::Feed.fetch_and_parse url
+      end
+      @feedjira
+    end
   #handle_asynchronously :fetch_items
 end

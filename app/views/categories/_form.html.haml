@@ -1,0 +1,14 @@
+.form-group{:class => ('has-error' if ! @errors.nil? && @errors[:name].count > 0)}
+  =f.label :name, :class => 'col-sm-2 control-label'
+  .col-sm-10
+    = f.text_field :name, :class => 'form-control'
+    - if !@errors.nil? && @errors[:name].count > 0
+      - @errors[:name].each do |msg|
+        %span.help-block= msg
+.form-group
+  =f.label :parent_id, :class => 'col-sm-2 control-label'
+  .col-sm-10
+    =f.select :parent_id, options_for_select(nested_tree_options(Category.where('user_id = ?', current_user).roots, @category) {|i| "#{'-' * i.level} #{i.name}" })
+.form-group
+  .col-sm-offset-2.col-sm-10
+    = f.submit 'Enregistrer', :class => 'btn btn-success'

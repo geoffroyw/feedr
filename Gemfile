@@ -1,4 +1,4 @@
-  source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.7'
@@ -20,6 +20,8 @@ gem 'feedjira'
 gem 'whenever'
 
 gem 'will_paginate', '~> 3.0.7'
+
+gem 'awesome_nested_set', '~> 3.0.1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

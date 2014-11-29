@@ -1,6 +1,6 @@
 %ol.breadcrumb
   %li=link_to 'Home', root_path
-  %li=link_to @user_feed.name, feed_path(@user_feed.feed)
+  %li=link_to @user_feed_base.name, feed_path(@user_feed.feed)
   %li.active Editer le flux
 
 
@@ -9,7 +9,7 @@
     %label.col-sm-2.control-label{:for => 'url'} Url
     .col-sm-10
       %input.form-control{:type => 'text', :disabled => 'disabled', :value => @user_feed.feed.url}
-  .form-group
+  .form-group{:class => ('has-error' if ! @errors.nil? && @errors[:name].count > 0)}
     =f.label :name, :class => 'col-sm-2 control-label'
     .col-sm-10
       = f.text_field :name, :class => 'form-control'

@@ -8,7 +8,6 @@ class FeedsController < ApplicationController
   end
 
   def create
-
     @new_feed = Feed.find_by url: feed_param[:url]
     if @new_feed.nil?
       @new_feed = Feed.new feed_param

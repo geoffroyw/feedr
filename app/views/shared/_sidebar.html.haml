@@ -4,7 +4,9 @@
       -if user_feed.unread_item_count > 0
         %strong
           = link_to "#{user_feed.name} (#{user_feed.unread_item_count})", feed_path(user_feed.feed)
-          = link_to edit_feed_path(user_feed), {:title => 'Modifier le flux'} do
+          = link_to edit_feed_path(user_feed.feed), {:title => 'Modifier le flux'} do
             %span.glyphicon.glyphicon-pencil
       -else
         = link_to "#{user_feed.name} (#{user_feed.unread_item_count})", feed_path(user_feed.feed)
+        = link_to edit_feed_path(user_feed.feed), {:title => 'Modifier le flux'} do
+          %span.glyphicon.glyphicon-pencil

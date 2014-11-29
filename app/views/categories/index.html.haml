@@ -1,0 +1,9 @@
+%ol.breadcrumb
+  %li=link_to 'Home', root_path
+  %li.active Mes catégories de flux
+
+=link_to 'Créer une catégorie', new_category_path
+
+
+%ol.categories
+-create_category_navigation_tree(@categories)

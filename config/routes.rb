@@ -22,6 +22,8 @@ Feedr::Application.routes.draw do
     end
   end
 
+  resources :categories
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

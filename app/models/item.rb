@@ -16,11 +16,12 @@ class Item < ActiveRecord::Base
 
   before_validation :set_count_to_zero
 
-  default_scope {order ('published_at DESC')}
+  default_scope {order ("#{table_name}.published_at DESC, #{table_name}.id ASC")}
 
   private
   def set_count_to_zero
     self.view_count = 0 if self.view_count.nil?
     self.read_count = 0 if self.read_count.nil?
   end
+
 end

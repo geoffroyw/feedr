@@ -7,6 +7,7 @@ describe UserFeed do
 
   it{should belong_to :user}
   it{should belong_to :feed}
+  it{should belong_to :category}
 
   it { should callback(:set_default_name).before(:validation)}
 end

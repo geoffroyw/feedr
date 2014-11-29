@@ -51,6 +51,10 @@ describe UserFeedsController do
 
       end
 
+      it 'asssign the request user_feed to @user_feed_base' do
+        expect(assigns(:user_feed_base)).to eq @user_feed
+      end
+
       it 'changes @user_feed attributes' do
         @user_feed.reload
         expect(@user_feed.name).to eq 'new name'
@@ -86,6 +90,10 @@ describe UserFeedsController do
 
       it 'assign @new_feed' do
         expect(assigns(:new_feed))
+      end
+
+      it 'does not change the name of @user_feed_base' do
+        expect(assigns(:user_feed_base).name).to_not eq ''
       end
     end
 

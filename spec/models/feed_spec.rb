@@ -14,5 +14,5 @@ describe Feed do
   it{should have_many(:user_feeds)}
   it{should have_many(:users).through :user_feeds }
 
-  it { should callback(:fetch_name).before(:validation)}
+  it { should callback(:fetch_name).before(:save)}
 end
