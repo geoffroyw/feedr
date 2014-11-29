@@ -20,6 +20,9 @@ Feedr::Application.routes.draw do
       get 'edit' =>'user_feeds#edit'
       patch 'update' =>'user_feeds#update', :as => 'update_user'
     end
+    collection do
+      get 'unread_item_count' => 'user_feeds#unread_item_count'
+    end
   end
 
   resources :categories

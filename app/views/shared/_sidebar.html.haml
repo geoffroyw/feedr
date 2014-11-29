@@ -1,12 +1,16 @@
 %ul.list-unstyled
   -user_feeds.each do |user_feed|
-    %li
+    %li.sidebar-item
       -if user_feed.unread_item_count > 0
         %strong
-          = link_to "#{user_feed.name} (#{user_feed.unread_item_count})", feed_path(user_feed.feed)
+          = link_to feed_path(user_feed.feed) do
+            =user_feed.name
+            %span.badge{'data-type' => 'feed', 'data-badge-for' => user_feed.id }=user_feed.unread_item_count
           = link_to edit_feed_path(user_feed.feed), {:title => 'Modifier le flux'} do
             %span.glyphicon.glyphicon-pencil
       -else
-        = link_to "#{user_feed.name} (#{user_feed.unread_item_count})", feed_path(user_feed.feed)
+        =link_to feed_path(user_feed.feed) do
+          =user_feed.name
+          %span.badge{'data-type' => 'feed', 'data-badge-for' => user_feed.id }=user_feed.unread_item_count
         = link_to edit_feed_path(user_feed.feed), {:title => 'Modifier le flux'} do
           %span.glyphicon.glyphicon-pencil

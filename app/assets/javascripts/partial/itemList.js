@@ -23,10 +23,6 @@ var mark_as_read = function(_this, feed_id, item_id) {
 
 
 $(document).ready(function() {
-
-
-
-
     $(document).on('mouseenter','.js-display-action',function(){
         showAction($(this))
     });
@@ -34,8 +30,6 @@ $(document).ready(function() {
     $(document).on('mouseleave','.js-display-action',function(){
         hideAction($(this))
     });
-
-
 
 
     $(document).on('click', '.js-show-content', function(event) {

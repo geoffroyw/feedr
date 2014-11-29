@@ -17,6 +17,16 @@ class UserFeedsController < ApplicationController
     end
   end
 
+  def unread_item_count
+    ret = []
+    @user_feeds.each do |uf|
+      ret << {'id' => uf.id, 'count' => uf.unread_item_count}
+    end
+    respond_to do |format|
+      format.json { render json: {:success => true, :values => ret.to_json}}
+    end
+  end
+
   private
   def find_user_feed
     user_feeds = UserFeed.where('user_id = ? and feed_id = ?', current_user.id, params[:id])
