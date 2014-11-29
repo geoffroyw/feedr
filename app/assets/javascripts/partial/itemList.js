@@ -31,6 +31,10 @@ $(document).ready(function() {
         hideAction($(this))
     });
 
+    $(document).on('click', '.js-remove-unread-state', function() {
+        $(this).parents('.feed').removeClass('unread');
+        $(this).removeClass('js-remove-unread-state');
+    });
 
     $(document).on('click', '.js-show-content', function(event) {
         event.preventDefault();

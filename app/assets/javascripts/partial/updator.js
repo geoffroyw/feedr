@@ -21,6 +21,9 @@ function updateUnreadCount() {
 
 
 $(document).ready(function() {
-    setInterval(updateUnreadCount,30000);
+    //setInterval(updateUnreadCount,30000);
 
-})
+    $(document).on('click', '.js-update-read-count', function() {
+        updateUnreadCount();
+    });
+});
