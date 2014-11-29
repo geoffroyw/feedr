@@ -3,7 +3,8 @@ class CategoriesController < ApplicationController
   before_filter :find_model, :only => [:edit, :update, :show]
 
   def index
-    @categories = current_user.categories.includes(:user_feeds)
+    @categories = current_user.categories.includes(:user_feeds, :children)
+
   end
 
   def new
@@ -25,11 +26,17 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-
+    render :edit
   end
 
   def update
-
+    if @category.update_attributes feed_category_param
+      flash[:success] = 'La catégorie a bien été mis à jour'
+      redirect_to categories_path
+    else
+      @errors = @category.errors
+      render :edit
+    end
   end
 
   def show
@@ -40,6 +47,9 @@ class CategoriesController < ApplicationController
   private
   def find_model
     @category = Category.where('user_id = ? and id = ?', current_user, params[:id]).first
+    if @category.nil?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def feed_category_param

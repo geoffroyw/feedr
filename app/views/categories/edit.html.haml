@@ -1,0 +1,8 @@
+%ol.breadcrumb
+  %li=link_to 'Home', root_path
+  %li=link_to 'Mes catégories de flux', categories_path
+  %li.active Editer le flux
+
+
+=form_for @category, url: {action: 'update', controller: 'categories', :id => @category}, method: 'patch', :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+  = render 'form', :f => f

@@ -23,5 +23,5 @@ class Item < ActiveRecord::Base
     self.view_count = 0 if self.view_count.nil?
     self.read_count = 0 if self.read_count.nil?
   end
-  
+
 end

@@ -2,7 +2,8 @@
   %li=link_to 'Home', root_path
   %li.active Mes catégories de flux
 
+=link_to 'Créer une catégorie', new_category_path
 
-%ol
-  -@categories.roots.map do |c|
-    = render 'list', :c => c
+
+%ol.categories
+-create_category_navigation_tree(@categories)

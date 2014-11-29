@@ -85,4 +85,94 @@ describe CategoriesController do
     end
   end
 
+  describe "GET 'edit'" do
+    context 'with valid user' do
+      before(:each) do
+        @category = create(:category, user: @current_user)
+        get 'edit', id: @category
+      end
+      it 'asssign the request category to @category' do
+        expect(assigns(:category)).to eq @category
+
+      end
+
+      it 'renders edit' do
+        is_expected.to render_template :edit
+      end
+
+      it 'assign @new_feed' do
+        expect(assigns(:new_feed))
+      end
+
+    end
+
+    context 'with invalid user' do
+      before(:each) do
+        @category = create(:category)
+      end
+
+      it 'raises 404' do
+        expect{ get 'edit', id: @category}.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
+
+
+  describe "PATCH 'update'" do
+    context 'with valid user and valid parameters' do
+      before(:each) do
+        @category = create(:category, user: @current_user)
+        patch 'update', id: @category, category: attributes_for(:category, name: 'new name')
+      end
+      it 'asssign the request user_feed to @user_feed' do
+        expect(assigns(:category)).to eq @category
+
+      end
+
+      it 'changes @user_feed attributes' do
+        @category.reload
+        expect(@category.name).to eq 'new name'
+      end
+
+      it 'redirect to feed_path' do
+        is_expected.to redirect_to :categories
+      end
+    end
+
+    context 'with valid user and invalid parameters' do
+      before(:each) do
+        @category = create(:category, user: @current_user)
+        patch 'update', id: @category, category: attributes_for(:category, name: '')
+      end
+      it 'asssign the request user_feed to @user_feed' do
+        expect(assigns(:category)).to eq @category
+
+      end
+
+      it 'does not changes @user_feed attributes' do
+        @category.reload
+        expect(@category.name).to_not eq ''
+      end
+
+      it 're-render edit screen' do
+        is_expected.to render_template :edit
+      end
+
+      it 'assigns @errors' do
+        expect(assigns(:errors))
+      end
+
+    end
+
+    context 'with invalid user' do
+      before(:each) do
+        @category = create(:category)
+      end
+
+      it 'raises 404' do
+        expect{ patch 'update', id: @category, category: attributes_for(:category, name: 'new name')}.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
+
 end
