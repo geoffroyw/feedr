@@ -33,6 +33,7 @@
             = f.text_field :url, :placeholder => 'Url', :class => 'form-control'
           = f.submit 'Ajouter', :class => 'btn btn-success'
     .container-fluid
+      = query_diet_widget if Rails.env.development?
       .row.content
         .col-md-2
           = render 'shared/sidebar', :user_feeds => @user_feeds
