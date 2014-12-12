@@ -44,7 +44,10 @@ class ItemsController < ApplicationController
   end
 
   def add_item_to_user_items
-    current_user.items.push @item
-    current_user.save
+    user_item = UserItem.create
+    user_item.item = @item
+    user_item.feed = @item.feed
+    user_item.user = current_user
+    user_item.save
   end
 end

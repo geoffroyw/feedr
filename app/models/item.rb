@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
   validates :view_count, numericality: { only_integer: true, :greater_than_or_equal_to => 0}, :presence => true
   validates :read_count, numericality: { only_integer: true, :greater_than_or_equal_to => 0}, :presence => true
 
-  belongs_to :feed
+  belongs_to :feed, counter_cache: :item_count
   has_many :user_items
 
   scope :read_by , -> (user) {where('id' =>  user.user_items.map{|user_item| user_item.item_id})}
@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
 
   before_validation :set_count_to_zero
 
-  default_scope {order ("#{table_name}.published_at DESC, #{table_name}.id ASC")}
+  default_scope {order ("#{table_name}.published_at DESC, #{table_name}.id DESC")}
 
   private
   def set_count_to_zero

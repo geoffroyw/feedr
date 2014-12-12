@@ -60,6 +60,7 @@ end
 
 group :development do
   gem 'bullet'
+  gem 'query_diet'
   gem 'ruby-growl'
   gem 'capistrano', '~>3.2.1'
   gem 'capistrano-rails', '~> 1.1'
