@@ -8,5 +8,5 @@ class UserItem < ActiveRecord::Base
   validates :item, :presence => true
   validates :feed, :presence => true
 
-  scope :of_feed_and_user , -> (feed, user) {where('feed_id = ? and user_id = ? ', feed.id, user.id)}
+  scope :of_feed_and_user , -> (feed_id, user_id) {where('feed_id = ? and user_id = ? ', feed_id, user_id)}
 end

@@ -15,7 +15,7 @@ class UserFeed < ActiveRecord::Base
 
 
   def unread_item_count
-    self.feed.item_count-UserItem.of_feed_and_user(self.feed, self.user).count
+    self.feed.item_count-UserItem.of_feed_and_user(self.feed_id, self.user_id).count
   end
 
   def read_item_count

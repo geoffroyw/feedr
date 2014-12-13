@@ -39,6 +39,17 @@ describe ItemsController do
     it 'add item to user items' do
       expect(@current_user.items).to include(@item)
     end
+
+    it 'does creates duplicate entries in user_item' do
+      user_item_count = UserItem.where('item_id' => @item.id).count
+      expect(user_item_count ).to eq(1)
+
+      get 'show', id: @item, feed_id: @feed
+
+      user_item_count = UserItem.where('item_id' => @item.id).count
+      expect(user_item_count ).to eq(1)
+
+    end
   end
 
   describe "GET 'read'" do

@@ -9,7 +9,7 @@ describe CategoriesController do
       get 'new'
     end
     it 'assign @new_category' do
-      expect(assigns(:new_category))
+      expect(assigns(:category))
     end
 
     it 'renders new' do
@@ -134,8 +134,8 @@ describe CategoriesController do
         expect(@category.name).to eq 'new name'
       end
 
-      it 'redirect to feed_path' do
-        is_expected.to redirect_to :categories
+      it 'redirect to category path' do
+        is_expected.to redirect_to category_path(@category)
       end
     end
 

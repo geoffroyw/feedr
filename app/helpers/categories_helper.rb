@@ -62,4 +62,44 @@ module CategoriesHelper
     current
   end
 
+  def create_sidebar(categories)
+    categories = Array(categories.is_a?(Class) ? categories.siblings : categories)
+    return unless current = categories.shift
+    parent_id = current.parent_id
+    haml_tag 'ul.categories' do
+      while current && current.parent_id == parent_id do
+        haml_tag :li do
+          haml_tag :a, current.name, :href=> category_path(current)
+          unless current.user_feeds.nil?
+            haml_tag :ul do
+              current.user_feeds.each do |f|
+                haml_tag :li do
+                  haml_tag :a, :href => feed_path(f) do
+                    if f.unread_item_count > 0
+                      haml_tag :strong do
+                        haml_concat f.name
+                        haml_tag :span, f.unread_item_count, :class => 'badge', 'data-type' => 'feed', 'data-badge-for' => f.id
+                      end
+                    else
+                      haml_concat f.name
+                      haml_tag :span, f.unread_item_count, :class => 'badge', 'data-type' => 'feed', 'data-badge-for' => f.id
+                    end
+                  end
+                  haml_tag :a, :href => feed_path(f) do
+                    haml_tag :span, :class => 'glyphicon glyphicon-pencil'
+                  end
+                end
+              end
+            end
+          end
+          if current.rgt > current.lft + 1
+            create_category_navigation_tree(current.children)
+          end
+          current = categories.shift
+        end
+      end
+    end
+    current
+  end
+
 end
