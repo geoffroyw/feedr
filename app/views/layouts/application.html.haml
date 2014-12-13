@@ -18,8 +18,10 @@
         =link_to 'Feedr', root_path, :class => 'navbar-brand'
       .collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li.active
-            =link_to 'Home', root_path, :class => 'active'
+          %li{:class => (controller.controller_name != 'categories' ? 'active' : '')}
+            =link_to 'Home', root_path, :class => (controller.controller_name != 'categories' ? 'active' : '' )
+          %li{:class => (controller.controller_name == 'categories' ? 'active' : '')}
+            =link_to 'Organiser mes flux', categories_path, :class => (controller.controller_name == 'categories' ? 'active' : '')
           %li
             %a{:href => '#'} About
           %li
@@ -36,7 +38,7 @@
       = query_diet_widget if Rails.env.development?
       .row.content
         .col-md-2
-          = render 'shared/sidebar', :user_feeds => @user_feeds
+          = render 'shared/sidebar', :user_feeds => @uncategorized_user_feeds
         .col-md-10
           =yield
     = render 'layouts/footer'

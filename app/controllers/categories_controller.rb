@@ -3,38 +3,60 @@ class CategoriesController < ApplicationController
   before_filter :find_model, :only => [:edit, :update, :show]
 
   def index
-    @categories = current_user.categories.includes(:user_feeds, :children)
 
   end
 
   def new
-    @new_category = Category.new
+    @category = Category.new
+    @category.user_feeds.build
+
   end
 
   def create
-    @new_category = Category.new feed_category_param
-    @new_category.user = current_user
 
-    if @new_category.save
+    user_feeds_id = feed_category_param['user_feeds_attributes']
+
+    params = feed_category_param
+    params.delete(:user_feeds_attributes)
+
+    @category = Category.new params
+    @category.user = current_user
+
+
+
+    if @category.save
+      update_feed_with_category_id(@category,user_feeds_id)
       flash[:notice] = 'La catégorie a bien été créée'
-      redirect_to category_path(@new_category)
+      redirect_to category_path(@category)
     else
-      @errors = @new_category.errors
+      @errors = @category.errors
       flash[:error] = 'Erreur lors de la création de la catégorie'
       render :new
     end
   end
 
   def edit
+    if @category.user_feeds.count > 0
+      @category.user_feeds = []
+    end
+    @category.user_feeds.build
+
     render :edit
   end
 
   def update
-    if @category.update_attributes feed_category_param
-      flash[:success] = 'La catégorie a bien été mis à jour'
-      redirect_to categories_path
+    user_feeds_id = feed_category_param['user_feeds_attributes']
+
+    params = feed_category_param
+    params.delete(:user_feeds_attributes)
+
+    if @category.update_attributes params
+      update_feed_with_category_id(@category, user_feeds_id )
+      flash[:success] = 'La catégorie a bien été mise à jour'
+      redirect_to category_path(@category)
     else
       @errors = @category.errors
+      flash[:error] = 'Erreur lors de la mise à jour de la catégorie'
       render :edit
     end
   end
@@ -53,6 +75,24 @@ class CategoriesController < ApplicationController
   end
 
   def feed_category_param
-    params.require(:category).permit([:name, :parent_id])
+      params.require(:category).permit([:name, :parent_id, user_feeds_attributes: [id: []]])
+  end
+
+  def update_feed_with_category_id(category, user_feed_ids)
+
+    category.user_feeds.each do |uf|
+      uf.category = nil
+      uf.save
+    end
+    unless user_feed_ids.nil?
+      user_feed_ids['0']['id'].each do |id|
+        uf = UserFeed.where('id = ? and user_id = ?', id, current_user).first
+        unless uf.nil?
+          uf.category = category
+          uf.save
+          uf.save
+        end
+      end
+    end
   end
 end
