@@ -44,10 +44,10 @@ class ItemsController < ApplicationController
   end
 
   def add_item_to_user_items
-    user_item = UserItem.create
-    user_item.item = @item
-    user_item.feed = @item.feed
-    user_item.user = current_user
+    user_item = UserItem.find_or_create_by :item => @item, :feed => @item.feed, :user => current_user
+    #user_item.item = @item
+    #user_item.feed = @item.feed
+    #user_item.user = current_user
     user_item.save
   end
 end
