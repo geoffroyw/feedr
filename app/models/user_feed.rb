@@ -1,7 +1,8 @@
 class UserFeed < ActiveRecord::Base
   belongs_to :user
   belongs_to :feed
-  belongs_to :category
+  has_many :user_feed_categories
+  has_many :categories, :through => :user_feed_categories
 
   validates :user, :presence => true
   validates :feed, :presence => true
