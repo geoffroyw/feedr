@@ -8,7 +8,7 @@
 .form-group
   =f.label :parent_id, :class => 'col-sm-2 control-label'
   .col-sm-10
-    =f.select :parent_id, options_for_select(nested_tree_options(Category.where('user_id = ?', current_user).roots, @category) {|i| "#{'-' * i.level} #{i.name}" }.unshift(['No Parent', nil]))
+    =f.select :parent_id, options_for_select(nested_tree_options(Category.where('user_id = ?', current_user).roots, @category.parent) {|i| "#{'-' * i.level} #{i.name}" }.unshift(['No Parent', nil]))
 
 =f.fields_for :user_feeds do |builder|
   .form-group
