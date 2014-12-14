@@ -14,12 +14,9 @@ class ApplicationController < ActionController::Base
 
   def fetch_user_feeds
     if current_user.nil?
-      @uncategorized_user_feeds = []
-      @categories = []
+      @user_feeds = []
     else
-      @user_feeds = current_user.user_feeds.includes(:feed)
-      @uncategorized_user_feeds = @user_feeds.where('category_id is null')
-      @categories = current_user.categories.roots.includes(:children, user_feeds: :feed)
+      @user_feeds = current_user.user_feeds.order(:name).includes(:feed)
     end
 
   end

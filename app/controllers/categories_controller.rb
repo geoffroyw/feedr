@@ -1,9 +1,9 @@
 class CategoriesController < ApplicationController
 
-  before_filter :find_model, :only => [:edit, :update, :show]
+  before_filter :find_model, :only => [:edit, :update, :show, :destroy]
 
   def index
-
+    @categories = current_user.categories.includes(:user_feeds).roots.includes(:user_feeds, :children)
   end
 
   def new
@@ -13,19 +13,10 @@ class CategoriesController < ApplicationController
   end
 
   def create
-
-    user_feeds_id = feed_category_param['user_feeds_attributes']
-
-    params = feed_category_param
-    params.delete(:user_feeds_attributes)
-
-    @category = Category.new params
+    @category = Category.new feed_category_param
     @category.user = current_user
 
-
-
     if @category.save
-      update_feed_with_category_id(@category,user_feeds_id)
       flash[:notice] = 'La catégorie a bien été créée'
       redirect_to category_path(@category)
     else
@@ -36,22 +27,11 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    if @category.user_feeds.count > 0
-      @category.user_feeds = []
-    end
-    @category.user_feeds.build
-
     render :edit
   end
 
   def update
-    user_feeds_id = feed_category_param['user_feeds_attributes']
-
-    params = feed_category_param
-    params.delete(:user_feeds_attributes)
-
-    if @category.update_attributes params
-      update_feed_with_category_id(@category, user_feeds_id )
+    if @category.update_attributes feed_category_param
       flash[:success] = 'La catégorie a bien été mise à jour'
       redirect_to category_path(@category)
     else
@@ -62,9 +42,14 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @items = Item.joins(:feed).joins(feed: :user_feeds).where('user_feeds.user_id = ? and user_feeds.category_id = ?', current_user, @category.id).includes(:feed).paginate(:page => params[:page], :per_page => 15)
+    @items = Item.joins(:feed).joins(feed: [user_feeds: :categories]).where('user_feeds.user_id = ? and categories.id = ?', current_user, @category.id).includes(:feed).paginate(:page => params[:page], :per_page => 15)
   end
 
+
+  def destroy
+    @category.destroy
+    redirect_to categories_path
+  end
 
   private
   def find_model
@@ -75,24 +60,7 @@ class CategoriesController < ApplicationController
   end
 
   def feed_category_param
-      params.require(:category).permit([:name, :parent_id, user_feeds_attributes: [id: []]])
+      params.require(:category).permit([:name, :parent_id])
   end
 
-  def update_feed_with_category_id(category, user_feed_ids)
-
-    category.user_feeds.each do |uf|
-      uf.category = nil
-      uf.save
-    end
-    unless user_feed_ids.nil?
-      user_feed_ids['0']['id'].each do |id|
-        uf = UserFeed.where('id = ? and user_id = ?', id, current_user).first
-        unless uf.nil?
-          uf.category = category
-          uf.save
-          uf.save
-        end
-      end
-    end
-  end
 end

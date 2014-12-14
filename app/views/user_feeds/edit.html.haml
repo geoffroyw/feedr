@@ -16,6 +16,14 @@
       - if !@errors.nil? && @errors[:name].count > 0
         - @errors[:name].each do |msg|
           %span.help-block= msg
+    .form-group
+      =f.label :category_ids, 'Categories',  :class => 'col-sm-2 control-label'
+      .col-sm-10
+        =collection_check_boxes(:user_feed, :category_ids, Category.all, :id, :name) do |b|
+          .checkbox
+            =b.label {b.check_box + b.text  }
+
+
 
   .form-group
     .col-sm-offset-2.col-sm-10
