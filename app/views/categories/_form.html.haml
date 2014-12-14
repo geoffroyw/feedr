@@ -9,3 +9,7 @@
   =f.label :parent_id, :class => 'col-sm-2 control-label'
   .col-sm-10
     =f.select :parent_id, options_for_select(nested_tree_options(Category.where('user_id = ?', current_user).roots, @category.parent) {|i| "#{'-' * i.level} #{i.name}" }.unshift(['No Parent', nil]))
+
+.form-group
+  .col-sm-offset-2.col-sm-10
+    = f.submit 'Enregistrer', :class => 'btn btn-success'
