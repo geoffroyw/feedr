@@ -12,7 +12,6 @@ class UserFeedsController < ApplicationController
       redirect_to feed_path(@user_feed.feed)
     else
       @errors = @user_feed.errors
-      #@user_feed_base.reload
       render :edit
     end
   end
@@ -39,6 +38,6 @@ class UserFeedsController < ApplicationController
   end
 
   def user_feed_param
-    params.require(:user_feed).permit(:name)
+    params.require(:user_feed).permit(:name, :category_ids => [] )
   end
 end

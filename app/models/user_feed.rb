@@ -11,6 +11,8 @@ class UserFeed < ActiveRecord::Base
 
   before_validation :set_default_name
 
+  accepts_nested_attributes_for :user_feed_categories
+
   scope :of_user , -> (user) {where('user_id' =>  user.id)}
 
 

@@ -42,7 +42,12 @@ module CategoriesHelper
     haml_tag 'ol.categories' do
       while current && current.parent_id == parent_id do
         haml_tag :li do
-          haml_tag :a, current.name, :href=> edit_category_path(current)
+          haml_tag :a, :href=> category_path(current) do
+            haml_concat current.name
+            haml_tag :a, :href => edit_category_path(current) do
+              haml_tag :span, :class => 'glyphicon glyphicon-pencil'
+            end
+          end
           unless current.user_feeds.nil?
             haml_tag :ul do
               current.user_feeds.each do |f|

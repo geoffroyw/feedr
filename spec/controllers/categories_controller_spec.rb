@@ -118,51 +118,30 @@ describe CategoriesController do
   end
 
 
-  describe "PATCH 'update'" do
+  describe "DELETE 'destroy'" do
     context 'with valid user and valid parameters' do
       before(:each) do
         @category = create(:category, user: @current_user)
-        patch 'update', id: @category, category: attributes_for(:category, name: 'new name')
+        patch 'destroy', id: @category
       end
-      it 'asssign the request user_feed to @user_feed' do
+      it 'asssign the request category to @category' do
         expect(assigns(:category)).to eq @category
 
       end
 
-      it 'changes @user_feed attributes' do
-        @category.reload
-        expect(@category.name).to eq 'new name'
-      end
-
-      it 'redirect to category path' do
-        is_expected.to redirect_to category_path(@category)
-      end
-    end
-
-    context 'with valid user and invalid parameters' do
-      before(:each) do
+      it 'deletes the category' do
         @category = create(:category, user: @current_user)
-        patch 'update', id: @category, category: attributes_for(:category, name: '')
-      end
-      it 'asssign the request user_feed to @user_feed' do
-        expect(assigns(:category)).to eq @category
-
-      end
-
-      it 'does not changes @user_feed attributes' do
-        @category.reload
-        expect(@category.name).to_not eq ''
+        @category.save!
+        expect {
+            delete :destroy, id: @category
+          }.to change(Category, :count).by(-1)
       end
 
-      it 're-render edit screen' do
-        is_expected.to render_template :edit
+      it 'redirect to categories path' do
+        is_expected.to redirect_to categories_path
       end
-
-      it 'assigns @errors' do
-        expect(assigns(:errors))
-      end
-
     end
+
 
     context 'with invalid user' do
       before(:each) do
@@ -174,5 +153,4 @@ describe CategoriesController do
       end
     end
   end
-
 end
