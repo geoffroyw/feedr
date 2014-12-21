@@ -8,4 +8,17 @@ class Category < ActiveRecord::Base
 
   acts_as_nested_set
 
+  before_save :set_color
+
+
+  def set_color
+    hash = 0
+    self.name.split('').map{|c| hash += c.ord}
+
+    hash = hash % 360
+
+    self.color = Color::HSL.new(hash, 70, 40).html
+
+  end
+
 end
