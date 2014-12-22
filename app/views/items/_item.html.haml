@@ -1,9 +1,12 @@
 .feed.js-display-action{:class => ('unread' unless current_user.items.include? item)}
+  .categories
+    -feed.user_feeds.of_user(current_user).first.categories.each do |c|
+      %span.category{:style => "background-color: #{c.color};" }
   .row
     .col-md-3
       .name
-        - if feed.custom_name(current_user).size > 45
-          =feed.custom_name(current_user)[0..45]
+        - if feed.custom_name(current_user).size > 30
+          =feed.custom_name(current_user)[0..30]
           = "..."
         -else
           =feed.custom_name(current_user)

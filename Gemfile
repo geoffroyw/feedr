@@ -7,17 +7,19 @@ gem 'rails', '4.1.7'
 gem 'mysql2'
 
 # Use SCSS for stylesheets
-#gem 'sass-rails', '~> 4.0.4'
-gem 'compass', '~> 1.0.1'
-gem 'compass-rails','~> 2.0.1'
+gem 'sass-rails', '~> 4.0.2'
+#gem 'sass', '3.2.19'
+#gem 'sprockets', '2.11.0'
+#gem 'compass', '~> 1.0.1'
+gem 'compass-rails','~> 2.0'
 gem 'haml-rails', '~>0.5.3'
 
 gem 'devise', '~>3.1.1'
 gem 'devise-i18n', '~> 0.10.0'
 
-gem 'delayed_job_active_record'
-gem 'feedjira'
-gem 'whenever'
+gem 'delayed_job_active_record', '~> 4.0.2'
+gem 'feedjira', '~> 1.5.0'
+gem 'whenever', '~> 0.9.4'
 
 gem 'will_paginate', '~> 3.0.7'
 
